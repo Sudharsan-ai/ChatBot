@@ -1,7 +1,5 @@
 # Intelligent Tamil Nadu PDS Assistant – AI-Powered Ration Shop Support System
 
----
-
 ## Overview
 
 The Intelligent Tamil Nadu **PDS** Assistant is an AI-driven chatbot platform developed for the Public Distribution System (**PDS**) to improve citizen accessibility and transparency in ration shop services. The system combines Artificial Intelligence, Natural Language Processing (**NLP**), Deep Learning, Speech Recognition, and Voice Assistance to provide smart support for ration card holders in Tamil Nadu.
@@ -9,8 +7,6 @@ The Intelligent Tamil Nadu **PDS** Assistant is an AI-driven chatbot platform de
 The platform acts as a virtual ration shop assistant capable of understanding Tamil language queries, processing voice input, providing entitlement information, checking stock availability, guiding users for grievance registration, and delivering government scheme updates.
 
 The chatbot is specially designed for rural and semi-urban users with voice-first interaction and multilingual support.
-
----
 
 ## Key Features
 
@@ -23,8 +19,6 @@ The chatbot is specially designed for rural and semi-urban users with voice-firs
 - Fast response generation using AI models
 - Supports Tamil and English languages
 
----
-
 ### Ration Card Assistance
 
 - Check ration card eligibility
@@ -32,8 +26,6 @@ The chatbot is specially designed for rural and semi-urban users with voice-firs
 - Display family member details
 - Aadhaar linkage verification
 - Shop allocation information
-
----
 
 ### Monthly Entitlement Support
 
@@ -45,8 +37,6 @@ Provides monthly details regarding:
 - Kerosene details
 - Oil distribution
 
----
-
 ### Stock Availability Tracking
 
 - Real-time stock checking
@@ -54,16 +44,12 @@ Provides monthly details regarding:
 - Out-of-stock notifications
 - Refill and distribution schedules
 
----
-
-### Complaint & Grievance Support
+### Complaint and Grievance Support
 
 - Complaint registration
 - Complaint status tracking
 - Corruption and shortage reporting
 - Citizen grievance guidance
-
----
 
 ### Government Scheme Updates
 
@@ -75,50 +61,44 @@ Provides updates about:
 - Subsidy announcements
 - Government welfare initiatives
 
----
-
 ## Voice Assistance System
 
 ### Speech-to-Text (Tamil Voice Input)
 
 The chatbot accepts Tamil voice input and converts it into text using AI-based speech recognition.
 
-### Features
+#### Features
 
 - Tamil speech recognition
 - Rural accent support
 - Noise-tolerant voice processing
 - Lightweight voice processing
 
-### Technologies
+#### Technologies
 
 - OpenAI Whisper
 - Vosk Speech Recognition
 - Indic Speech Models
 - Google Speech **API**
 
----
-
 ### Text-to-Speech (Tamil Voice Output)
 
 The chatbot provides natural Tamil voice responses for improved accessibility.
 
-### Features
+#### Features
 
 - Human-like Tamil voice output
 - Voice-first accessibility design
 - Audio support for non-literate users
 
-### Technologies
+#### Technologies
 
 - Coqui **TTS**
 - gTTS
 - Azure Speech Services
 - Festival **TTS**
 
----
-
-## Security & Privacy
+## Security and Privacy
 
 ### Citizen Data Protection
 
@@ -128,8 +108,6 @@ The chatbot provides natural Tamil voice responses for improved accessibility.
 - Secure session management
 - **OTP** verification system
 
----
-
 ### Security Features
 
 - **JWT** Authentication
@@ -138,9 +116,7 @@ The chatbot provides natural Tamil voice responses for improved accessibility.
 - Secure database access
 - Voice data privacy handling
 
----
-
-## Scalability & Performance
+## Scalability and Performance
 
 - Supports concurrent citizen users
 - Optimized low-latency response system
@@ -148,8 +124,6 @@ The chatbot provides natural Tamil voice responses for improved accessibility.
 - Mobile-friendly architecture
 - Offline and low-internet optimization
 - Cache-enabled faster retrieval
-
----
 
 ## Technology Stack
 
@@ -160,17 +134,13 @@ The chatbot provides natural Tamil voice responses for improved accessibility.
 - Tailwind **CSS**
 - Material UI
 
----
-
 ### Backend
 
 - FastAPI / Flask
 - Python
 - **REST** APIs
 
----
-
-### AI & NLP
+### AI and NLP
 
 - IndicBERT
 - MuRIL
@@ -179,8 +149,6 @@ The chatbot provides natural Tamil voice responses for improved accessibility.
 - Sentence Transformers
 - Retrieval-Augmented Generation (**RAG**)
 
----
-
 ### Speech Processing
 
 - OpenAI Whisper
@@ -188,16 +156,12 @@ The chatbot provides natural Tamil voice responses for improved accessibility.
 - gTTS
 - Vosk
 
----
-
-### Database & Storage
+### Database and Storage
 
 - PostgreSQL / MySQL
 - Redis Cache
 - Vector Database (**FAISS** / ChromaDB)
 - Cloud Storage
-
----
 
 ## System Modules
 
@@ -212,8 +176,6 @@ Handles citizen queries related to:
 - Shop information
 - Government schemes
 
----
-
 ### 2. Stock Management Module
 
 Processes and manages:
@@ -224,8 +186,6 @@ Processes and manages:
 - Product distribution tracking
 - Real-time stock monitoring
 
----
-
 ### 3. Voice Assistance Module
 
 Provides:
@@ -235,8 +195,6 @@ Provides:
 - Tamil audio responses
 - Multilingual interaction
 
----
-
 ### 4. Complaint Management Module
 
 Allows citizens to:
@@ -245,8 +203,6 @@ Allows citizens to:
 - Track complaint status
 - Report shortages
 - Submit grievances securely
-
----
 
 ### 5. Admin Dashboard
 
@@ -258,53 +214,43 @@ Allows administrators to:
 - Track complaints
 - Analyze citizen interactions
 
----
-
 ## Workflow
 
-### Citizen opens the chatbot application.
+## Citizen opens the chatbot application.
 
  User provides voice or text input in Tamil. ## Speech-to-Text converts Tamil speech into text. ## NLP model identifies user intent. ## System accesses PDS database/API. ## AI generates an intelligent response. ## Text-to-Speech converts response into Tamil audio. ## Citizen receives voice/text response.
-
----
 
 ## Sample User Interaction
 
 ### Example 1 – Monthly Rice Query
 
-### User:
+User:
 
 “இந்த மாதம் எனக்கு எவ்வளவு அரிசி கிடைக்கும்?”
 
-### Chatbot:
+Chatbot:
 
 “இந்த மாதம் உங்களுக்கு 20 கிலோ அரிசி கிடைக்கும்.”
 
----
-
 ### Example 2 – Stock Availability Query
 
-### User:
+User:
 
 “சர்க்கரை இருப்பு உள்ளதா?”
 
-### Chatbot:
+Chatbot:
 
 “உங்கள் ரேஷன் கடையில் சர்க்கரை இருப்பு உள்ளது.”
 
----
-
 ### Example 3 – Complaint Registration
 
-### User:
+User:
 
 “எங்கள் கடையில் எண்ணெய் இல்லை.”
 
-### Chatbot:
+Chatbot:
 
 “உங்கள் புகாரை பதிவு செய்ய விரும்புகிறீர்களா?”
-
----
 
 ## System Architecture
 
@@ -344,8 +290,6 @@ Allows administrators to:
 +------------------------+
 ```
 
----
-
 ## Lightweight Deployment
 
 The chatbot is optimized for:
@@ -364,8 +308,6 @@ Deployment Platforms:
 - Raspberry Pi kiosks
 - Android tablets
 
----
-
 ## Future Enhancements
 
 - Smart recommendation engine
@@ -374,8 +316,6 @@ Deployment Platforms:
 - Dialect-aware Tamil **NLP**
 - Emotion-aware voice interaction
 - Analytics dashboard for officials
-
----
 
 ## Conclusion
 
