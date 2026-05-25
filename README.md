@@ -316,6 +316,14 @@ Deployment Platforms:
 - Dialect-aware Tamil **NLP**
 - Emotion-aware voice interaction
 - Analytics dashboard for officials
+### OUTPUTS: 
+
+<img width="1919" height="1024" alt="image" src="https://github.com/user-attachments/assets/873c6395-11ff-455f-b37b-c9c9110f4691" />
+
+<img width="1919" height="1034" alt="image" src="https://github.com/user-attachments/assets/bff14f82-24c2-4719-b7ca-c40383b68c68" />
+
+<img width="1919" height="1034" alt="image" src="https://github.com/user-attachments/assets/b963f84b-601b-40f3-9305-8438c7db6e32" />
+
 
 ## Conclusion
 
