@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif}
+.root{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;display:flex;flex-direction:column;background:var(--color-background-primary);height:680px}
+.hdr{background:#085041;display:flex;flex-direction:column;flex-shrink:0}
+.hdr-top{display:flex;align-items:center;gap:10px;padding:12px 16px 8px}
+.hdr-icon{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#9FE1CB;font-size:17px;flex-shrink:0}
+.hdr-info{flex:1}
+.hdr-title{font-size:14px;font-weight:500;color:#E1F5EE}
+.hdr-sub{font-size:11px;color:#5DCAA5;margin-top:1px}
+.dot{width:7px;height:7px;border-radius:50%;background:#5DCAA5;animation:blink 2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.lang-bar{display:flex;align-items:center;padding:0 16px 10px;gap:10px}
+.lpill{display:flex;border-radius:20px;overflow:hidden;border:0.5px solid rgba(255,255,255,.2);background:rgba(0,0,0,.15)}
+.lbtn{padding:4px 16px;font-size:12px;font-weight:500;cursor:pointer;color:rgba(255,255,255,.55);transition:all .2s;border:none;background:transparent;font-family:inherit}
+.lbtn.on{background:#1D9E75;color:#fff}
+.ldiv{width:0.5px;background:rgba(255,255,255,.2);align-self:stretch}
+#lhint{font-size:11px;color:#5DCAA5}
+.dbbar{background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-tertiary);padding:7px 12px;display:flex;align-items:center;gap:7px;flex-shrink:0}
+.dblabel{font-size:11px;font-weight:500;color:var(--color-text-secondary);white-space:nowrap}
+select.dbsel{font-family:inherit;font-size:12px;padding:3px 7px;border-radius:8px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer;flex:1;min-width:0}
+.dbbadge{font-size:11px;padding:2px 8px;border-radius:12px;font-weight:500;white-space:nowrap;flex-shrink:0}
+.dbbtn{font-size:11px;padding:3px 9px;border-radius:8px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;transition:all .15s}
+.dbbtn:hover{background:#E1F5EE;color:#085041;border-color:#1D9E75}
+.chips{display:flex;gap:6px;padding:8px 12px;overflow-x:auto;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);flex-shrink:0;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{font-size:11.5px;padding:4px 11px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0;font-family:inherit}
+.chip:hover{background:#E1F5EE;border-color:#1D9E75;color:#085041}
+.msgs{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin}
+.row{display:flex;gap:8px;max-width:90%}
+.row.u{align-self:flex-end;flex-direction:row-reverse}
+.row.b{align-self:flex-start}
+.av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px}
+.row.b .av{background:#085041;color:#9FE1CB}
+.row.u .av{background:#E1F5EE;color:#085041;font-size:11px}
+.bub{padding:9px 13px;font-size:13px;line-height:1.65;border-radius:16px;color:var(--color-text-primary)}
+.row.b .bub{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:4px 16px 16px 16px}
+.row.u .bub{background:#085041;color:#E1F5EE;border-radius:16px 4px 16px 16px}
+.ts{font-size:10px;color:var(--color-text-tertiary);margin-top:3px;padding:0 2px}
+/* .wlc-b{display:inline-block;background:#E1F5EE;color:#085041;font-size:11px;font-weight:500;padding:3px 10px;border-radius:12px;margin-top:8px} */
+.inp-area{padding:9px 12px;border-top:0.5px solid var(--color-border-tertiary);display:flex;gap:7px;align-items:flex-end;background:var(--color-background-primary);flex-shrink:0;background:#E1F5EE;color:#085041;padding:3px 10px;border-radius:12px;margin-top:8px}
+.inp-wrap{flex:1;position:relative;border-color:#1D9E75}
+textarea.inp{font-family:inherit;width:100%;padding:8px 34px 8px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-primary);font-size:13px;outline:none;resize:none;min-height:36px;max-height:80px;line-height:1.5;transition:border-color .15s}
+textarea.inp:focus{border-color:#1D9E75}
+textarea.inp::placeholder{color:var(--color-text-tertiary)}
+.xbtn{position:absolute;right:8px;bottom:8px;border:none;background:none;cursor:pointer;color:var(--color-text-tertiary);font-size:14px;padding:2px;line-height:1}
+.xbtn:hover{color:#085041}
+.sbtn{width:36px;height:36px;border-radius:50%;background:#085041;color:#E1F5EE;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:all .15s}
+.sbtn:hover{background:#1D9E75}
+.sbtn:active{transform:scale(.95)}
+.dbpanel{background:var(--color-background-secondary);border-top:0.5px solid var(--color-border-tertiary);padding:10px 12px;overflow-y:auto;max-height:210px;display:none;flex-shrink:0}
+.dbpanel.open{display:block}
+.dbt{width:100%;border-collapse:collapse;font-size:11px}
+.dbt th{text-align:left;font-weight:500;color:var(--color-text-secondary);padding:3px 7px;border-bottom:0.5px solid var(--color-border-tertiary);white-space:nowrap}
+.dbt td{padding:3px 7px;color:var(--color-text-primary);border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top}
+.dbt tr:last-child td{border-bottom:none}
+.tg{display:inline-block;font-size:10px;padding:1px 6px;border-radius:10px;font-weight:500}
+.g-phh{background:#E1F5EE;color:#085041}.g-aay{background:#FAEEDA;color:#633806}.g-nphh{background:#E6F1FB;color:#0C447C}
+.g-ok{background:#EAF3DE;color:#27500A}.g-low{background:#FAEEDA;color:#633806}.g-out{background:#FCEBEB;color:#791F1F}
+.g-open{background:#FAEEDA;color:#633806}.g-done{background:#EAF3DE;color:#27500A}
+.sectitle{font-size:11px;font-weight:500;color:var(--color-text-secondary);padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:5px;margin-top:10px}
+.sectitle:first-child{margin-top:0}
+.wlc{text-align:center;padding:24px 16px 16px;color:var(--color-text-secondary)}
+.wlc-icon{font-size:32px;color:#1D9E75;margin-bottom:10px}
+.wlc-t{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+.wlc-s{font-size:12px;line-height:1.7}
+.info-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;margin-top:6px;font-size:12.5px}
+.ic-title{font-size:11.5px;font-weight:500;color:#085041;margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.ic-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px}
+.ic-row:last-child{border-bottom:none}
+.ic-lbl{color:var(--color-text-secondary)}
+.ic-val{font-weight:500;color:var(--color-text-primary)}
+.ic-ok{color:#27500A}.ic-low{color:#633806}.ic-out{color:#791F1F}
+.notice{font-size:12px;padding:7px 11px;border-radius:var(--border-radius-md);color:#0C447C;background:#E6F1FB;border:0.5px solid #B5D4F4;margin:3px 0}
+</style>
+
+</head>
+
+<body>
+
+<!-- your full HTML code here -->
+<script>
+const DB = {
+  rationCards:[
+    {id:'RC001',name:'முருகேசன் கோவிந்தசாமி',nameEn:'Murugesa Govindasamy',type:'PHH',district:'Tirupattur',taluk:'Ambur',shopId:'S001',aadhaar:true,collected:false,cardNo:'TN-TPT-2019-004821',rice:20,sugar:1,oil:1,kerosene:2,
+     members:[{name:'முருகேசன்',age:45,rel:'தலைவர் / Head'},{name:'மீனாட்சி',age:40,rel:'மனைவி / Wife'},{name:'கார்த்திக்',age:18,rel:'மகன் / Son'},{name:'பிரியா',age:15,rel:'மகள் / Daughter'}]},
+    {id:'RC002',name:'லட்சுமி நாராயணன்',nameEn:'Lakshmi Narayanan',type:'AAY',district:'Vellore',taluk:'Vellore',shopId:'S002',aadhaar:true,collected:true,cardNo:'TN-VLR-2015-001134',rice:35,sugar:1,oil:1,kerosene:0,
+     members:[{name:'லட்சுமி',age:62,rel:'தலைவர் / Head'},{name:'நாராயணன்',age:68,rel:'கணவர் / Husband'},{name:'சுரேஷ்',age:35,rel:'மகன் / Son'}]},
+    {id:'RC003',name:'Rajan Kumar',nameEn:'Rajan Kumar',type:'NPHH',district:'Chennai',taluk:'Egmore',shopId:'S003',aadhaar:false,collected:false,cardNo:'TN-CHN-2021-009987',rice:10,sugar:0.5,oil:0.5,kerosene:0,
+     members:[{name:'Rajan Kumar',age:38,rel:'Head'},{name:'Priya Rajan',age:34,rel:'Wife'},{name:'Arun',age:10,rel:'Son'}]},
+    {id:'RC004',name:'ஃபாத்திமா பேகம்',nameEn:'Fatima Begum',type:'PHH',district:'Tirupattur',taluk:'Ambur',shopId:'S001',aadhaar:true,collected:false,cardNo:'TN-TPT-2020-007342',rice:25,sugar:1,oil:1,kerosene:2,
+     members:[{name:'ஃபாத்திமா',age:35,rel:'தலைவர் / Head'},{name:'இர்ஷாத்',age:38,rel:'கணவர் / Husband'},{name:'ஷாஹினா',age:12,rel:'மகள் / Daughter'},{name:'ஷாஃபிர்',age:8,rel:'மகன் / Son'},{name:'தாதி',age:70,rel:'மாமியார் / Mother-in-law'}]},
+    {id:'RC005',name:'செல்வம் பழனிசாமி',nameEn:'Selvam Palanisamy',type:'PHH',district:'Salem',taluk:'Salem West',shopId:'S004',aadhaar:true,collected:true,cardNo:'TN-SLM-2018-003210',rice:10,sugar:1,oil:1,kerosene:2,
+     members:[{name:'செல்வம்',age:50,rel:'தலைவர் / Head'},{name:'கமலா',age:46,rel:'மனைவி / Wife'}]}
+  ],
+  shops:[
+    {id:'S001',name:'அம்பூர் மத்திய ரேஷன் கடை',nameEn:'Ambur Central Ration Shop',no:'TN/TPT/AMB/042',dealer:'Rajendran',address:'Gandhi Salai, Ambur - 635802',phone:'04174-242100',hours:'9:00 AM – 1:00 PM, Mon–Sat',
+     stock:{rice:{qty:1850,s:'ok'},sugar:{qty:120,s:'ok'},wheat:{qty:340,s:'ok'},oil:{qty:80,s:'low'},kerosene:{qty:200,s:'ok'}}},
+    {id:'S002',name:'வேலூர் நகர ரேஷன் கடை',nameEn:'Vellore City Ration Shop',no:'TN/VLR/CTY/017',dealer:'Muthulakshmi',address:'RMS Colony, Vellore - 632001',phone:'0416-222345',hours:'8:30 AM – 12:30 PM, Mon–Sat',
+     stock:{rice:{qty:2400,s:'ok'},sugar:{qty:0,s:'out'},wheat:{qty:500,s:'ok'},oil:{qty:150,s:'ok'},kerosene:{qty:0,s:'out'}}},
+    {id:'S003',name:'Egmore Central Ration Shop',nameEn:'Egmore Central Ration Shop',no:'TN/CHN/EGM/009',dealer:'Subramaniam',address:'EVR Periyar Road, Egmore, Chennai - 600008',phone:'044-28194400',hours:'9:00 AM – 2:00 PM, Mon–Sat',
+     stock:{rice:{qty:3200,s:'ok'},sugar:{qty:250,s:'ok'},wheat:{qty:0,s:'out'},oil:{qty:320,s:'ok'},kerosene:{qty:0,s:'out'}}},
+    {id:'S004',name:'சேலம் மேற்கு ரேஷன் கடை',nameEn:'Salem West Ration Shop',no:'TN/SLM/WST/031',dealer:'Annadurai',address:'Shevapet, Salem - 636002',phone:'0427-2411234',hours:'9:00 AM – 1:00 PM, Mon–Fri',
+     stock:{rice:{qty:600,s:'low'},sugar:{qty:90,s:'ok'},wheat:{qty:200,s:'ok'},oil:{qty:0,s:'out'},kerosene:{qty:100,s:'ok'}}}
+  ],
+  complaints:[
+    {id:'CMP-2024-004821',rcId:'RC001',type:'Stock Shortage',item:'Oil',desc:'எண்ணெய் 2 மாதமாக கிடைக்கவில்லை',status:'open',date:'2024-03-10'},
+    {id:'CMP-2024-001134',rcId:'RC002',type:'Dealer Misconduct',item:'General',desc:'Dealer not providing proper quantity',status:'closed',date:'2024-02-15',res:'Dealer warned. Extra stock credited.'},
+    {id:'CMP-2024-009981',rcId:'RC003',type:'Aadhaar Link',item:'General',desc:'Aadhaar not linked, unable to collect',status:'open',date:'2024-03-18'}
+  ],
+  transactions:[
+    {id:'TXN-001',rcId:'RC001',month:'Feb 2024',rice:20,sugar:1,oil:1,kerosene:2,date:'2024-02-05'},
+    {id:'TXN-002',rcId:'RC002',month:'Mar 2024',rice:35,sugar:1,oil:1,kerosene:0,date:'2024-03-02'},
+    {id:'TXN-003',rcId:'RC002',month:'Feb 2024',rice:35,sugar:1,oil:1,kerosene:0,date:'2024-02-03'},
+    {id:'TXN-004',rcId:'RC005',month:'Mar 2024',rice:10,sugar:1,oil:0,kerosene:2,date:'2024-03-08'},
+    {id:'TXN-005',rcId:'RC001',month:'Jan 2024',rice:20,sugar:1,oil:1,kerosene:2,date:'2024-01-07'}
+  ],
+  schemes:[
+    {id:'SCH001',ta:'இலவச அரிசி திட்டம்',en:'Free Rice Scheme',elig:'PHH, AAY',benefit:'5kg free rice per person/month',active:true},
+    {id:'SCH002',ta:'பொங்கல் பரிசு',en:'Pongal Gift Hamper',elig:'All cardholders',benefit:'Rice 1kg, Sugar 1kg, Dhall 1kg, Cashew 100g',active:true},
+    {id:'SCH003',ta:'PMGKAY',en:'PMGKAY (Central Govt)',elig:'PHH, AAY',benefit:'5kg free grain per person/month',active:true},
+    {id:'SCH004',ta:'அம்மா உணவகம்',en:'Amma Unavagam',elig:'All citizens',benefit:'Breakfast ₹5, Meals ₹10 at govt canteens',active:true},
+    {id:'SCH005',ta:'பெண்கள் நலத் திட்டம்',en:'Women Welfare Scheme',elig:'Female head, PHH',benefit:'Free saree once a year; priority collection',active:true},
+    {id:'SCH006',ta:'பேரிடர் நிவாரணம்',en:'Disaster Relief',elig:'Affected families',benefit:'Emergency rice 10kg, kerosene 2L, oil 1L',active:false}
+  ]
+};
+
+let lang='ta', curId='RC001';
+
+function rc(){return DB.rationCards.find(r=>r.id===curId)}
+function shop(){return DB.shops.find(s=>s.id===rc().shopId)}
+function cmps(){return DB.complaints.filter(c=>c.rcId===curId)}
+function txns(){return DB.transactions.filter(t=>t.rcId===curId)}
+
+const CHIPS={
+  ta:[
+    {l:'🌾 என் அரிசி விவரம்', fn:'rice'},
+    {l:'🪪 கார்டு விவரம்',     fn:'card'},
+    {l:'🏪 கடை இருப்பு',       fn:'stock'},
+    {l:'👨‍👩‍👧 குடும்பம்',       fn:'family'},
+    {l:'📋 புகார் பதிவு',       fn:'complaint'},
+    {l:'🏛️ திட்டங்கள்',         fn:'schemes'},
+    {l:'📅 வரலாறு',             fn:'history'},
+    {l:'🔗 ஆதார் நிலை',        fn:'aadhaar'},
+  ],
+  en:[
+    {l:'🌾 My rice entitlement', fn:'rice'},
+    {l:'🪪 Card details',        fn:'card'},
+    {l:'🏪 Shop stock',          fn:'stock'},
+    {l:'👨‍👩‍👧 Family members',   fn:'family'},
+    {l:'📋 File complaint',      fn:'complaint'},
+    {l:'🏛️ My schemes',          fn:'schemes'},
+    {l:'📅 History',             fn:'history'},
+    {l:'🔗 Aadhaar status',      fn:'aadhaar'},
+  ]
+};
+
+function now(){return new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}
+function rsz(e){e.style.height='auto';e.style.height=Math.min(e.scrollHeight,80)+'px'}
+function clr(){const i=document.getElementById('inp');i.value='';i.style.height='auto'}
+
+function addMsg(role,html){
+  document.getElementById('wlc')?.remove();
+  const m=document.getElementById('msgs');
+  const row=document.createElement('div');
+  row.className='row '+role;
+  const av=document.createElement('div');
+  av.className='av';
+  av.innerHTML=role==='b'?'<i class="ti ti-robot" aria-hidden="true"></i>':'<i class="ti ti-user" aria-hidden="true"></i>';
+  const wrap=document.createElement('div');
+  const bub=document.createElement('div');
+  bub.className='bub';
+  bub.innerHTML=html;
+  const ts=document.createElement('div');
+  ts.className='ts';
+  ts.textContent=now();
+  wrap.appendChild(bub);wrap.appendChild(ts);
+  row.appendChild(av);row.appendChild(wrap);
+  m.appendChild(row);
+  m.scrollTop=m.scrollHeight;
+}
+
+function stockColor(s){return s==='ok'?'ic-ok':s==='low'?'ic-low':'ic-out'}
+function stockLabel(s,ta){
+  if(ta) return s==='ok'?'கிடைக்கும்':s==='low'?'குறைவு':'இல்லை';
+  return s==='ok'?'Available':s==='low'?'Low stock':'Out of stock';
+}
+
+function respond(intent){
+  const r=rc(), sh=shop();
+  const ta=lang==='ta';
+
+  if(intent==='rice'){
+    const col=r.collected?'ic-out':'ic-ok';
+    const collTxt=ta?(r.collected?'✅ இந்த மாதம் ஏற்கனவே சேகரிக்கப்பட்டது':'⏳ இன்னும் சேகரிக்கவில்லை'):(r.collected?'✅ Already collected this month':'⏳ Not yet collected this month');
+    return `<div class="info-card">
+      <div class="ic-title"><i class="ti ti-wheat" aria-hidden="true"></i> ${ta?'மாதாந்திர உரிமைகள்':'Monthly Entitlements'} — ${r.id}</div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'அரிசி':'Rice'}</span><span class="ic-val">${r.rice} kg</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'சர்க்கரை':'Sugar'}</span><span class="ic-val">${r.sugar} kg</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'எண்ணெய்':'Oil'}</span><span class="ic-val">${r.oil} L</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'மண்ணெண்ணெய்':'Kerosene'}</span><span class="ic-val">${r.kerosene>0?r.kerosene+' L':(ta?'ஒதுக்கப்படவில்லை':'Not allocated')}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'குடும்பம்':'Family size'}</span><span class="ic-val">${r.members.length} ${ta?'பேர்':'members'}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'இந்த மாத நிலை':'This month status'}</span><span class="ic-val ${col}">${collTxt}</span></div>
+    </div>
+    ${ta?`<br>📍 ${sh.name} — ${sh.hours}`:`<br>📍 ${sh.nameEn} — ${sh.hours}`}`;
+  }
+
+  if(intent==='card'){
+    return `<div class="info-card">
+      <div class="ic-title"><i class="ti ti-id" aria-hidden="true"></i> ${ta?'ரேஷன் கார்டு விவரம்':'Ration Card Details'}</div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'கார்டு எண்':'Card Number'}</span><span class="ic-val">${r.cardNo}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'பெயர்':'Name'}</span><span class="ic-val">${r.name}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'வகை':'Type'}</span><span class="ic-val">${r.type}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'மாவட்டம்':'District'}</span><span class="ic-val">${r.district}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'தாலுகா':'Taluk'}</span><span class="ic-val">${r.taluk}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'ஆதார் இணைப்பு':'Aadhaar Link'}</span><span class="ic-val ${r.aadhaar?'ic-ok':'ic-out'}">${r.aadhaar?(ta?'✅ இணைக்கப்பட்டது':'✅ Linked'):(ta?'❌ இணைக்கப்படவில்லை':'❌ Not linked')}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'கடை':'Assigned Shop'}</span><span class="ic-val">${sh.no}</span></div>
+    </div>`;
+  }
+
+  if(intent==='stock'){
+    const rows=Object.entries(sh.stock).map(([k,v])=>{
+      const names={rice:ta?'அரிசி':'Rice',sugar:ta?'சர்க்கரை':'Sugar',wheat:ta?'கோதுமை':'Wheat',oil:ta?'எண்ணெய்':'Oil',kerosene:ta?'மண்ணெண்ணெய்':'Kerosene'};
+      const unit={rice:'kg',sugar:'kg',wheat:'kg',oil:'L',kerosene:'L'};
+      return `<div class="ic-row"><span class="ic-lbl">${names[k]||k}</span><span class="ic-val ${stockColor(v.s)}">${v.qty} ${unit[k]} — ${stockLabel(v.s,ta)}</span></div>`;
+    }).join('');
+    return `<div class="info-card">
+      <div class="ic-title"><i class="ti ti-building-store" aria-hidden="true"></i> ${ta?'கடை இருப்பு நிலை':'Shop Stock Status'} — ${sh.no}</div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'கடை':'Shop'}</span><span class="ic-val">${ta?sh.name:sh.nameEn}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'முகவர்':'Dealer'}</span><span class="ic-val">${sh.dealer}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'நேரம்':'Hours'}</span><span class="ic-val">${sh.hours}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'தொலைபேசி':'Phone'}</span><span class="ic-val">${sh.phone}</span></div>
+      ${rows}
+    </div>`;
+  }
+
+  if(intent==='family'){
+    const rows=r.members.map((m,i)=>`<div class="ic-row"><span class="ic-lbl">${i+1}. ${m.name}</span><span class="ic-val">${ta?'வயது':'Age'} ${m.age} · ${m.rel}</span></div>`).join('');
+    return `<div class="info-card">
+      <div class="ic-title"><i class="ti ti-users" aria-hidden="true"></i> ${ta?'குடும்ப உறுப்பினர்கள்':'Family Members'} (${r.members.length})</div>
+      ${rows}
+    </div>`;
+  }
+
+  if(intent==='complaint'){
+    const list=cmps();
+    const newId='CMP-2024-'+Math.floor(Math.random()*90000+10000);
+    const listHtml=list.length?list.map(c=>`<div class="ic-row"><span class="ic-lbl">${c.id}</span><span class="ic-val" style="color:${c.status==='open'?'#633806':'#27500A'}">${c.status==='open'?(ta?'திறந்த':'Open'):(ta?'தீர்க்கப்பட்டது':'Resolved')}</span></div>`).join(''):`<div class="ic-row"><span class="ic-lbl" style="color:var(--color-text-tertiary)">${ta?'முந்தைய புகார் இல்லை':'No previous complaints'}</span></div>`;
+    return `<div class="info-card">
+      <div class="ic-title"><i class="ti ti-alert-triangle" aria-hidden="true"></i> ${ta?'புகார் பதிவு':'Complaint Registration'}</div>
+      <div class="ic-row"><span class="ic-lbl ic-ok">${ta?'✅ பதிவு எண்':'✅ New Ref No'}</span><span class="ic-val">${newId}</span></div>
+      <div class="ic-row"><span class="ic-lbl">${ta?'நிலை':'Status'}</span><span class="ic-val ic-open">${ta?'பதிவு செய்யப்பட்டது':'Registered — Open'}</span></div>
+    </div>
+    <div class="info-card" style="margin-top:8px">
+      <div class="ic-title">${ta?'முந்தைய புகார்கள்':'Previous Complaints'}</div>
+      ${listHtml}
+    </div>`;
+  }
+
+  if(intent==='schemes'){
+    const eligible=DB.schemes.filter(s=>{
+      if(!s.active) return false;
+      if(s.elig.includes('All')) return true;
+      return s.elig.includes(r.type);
+    });
+    const rows=eligible.map(s=>`<div class="ic-row"><span class="ic-lbl">${ta?s.ta:s.en}</span><span class="ic-val" style="font-size:11px;max-width:55%;text-align:right">${s.benefit}</span></div>`).join('');
+    const inactive=DB.schemes.filter(s=>!s.active);
+    return `<div class="info-card">
+      <div class="ic-title"><i class="ti ti-flag" aria-hidden="true"></i> ${ta?'தகுதியான திட்டங்கள்':'Eligible Schemes'} (${eligible.length})</div>
+      ${rows}
+    </div>
+    <div class="info-card" style="margin-top:8px">
+      <div class="ic-title" style="color:var(--color-text-secondary)">${ta?'தற்போது இல்லாத திட்டங்கள்':'Inactive Schemes'}</div>
+      ${inactive.map(s=>`<div class="ic-row" style="opacity:.6"><span class="ic-lbl">${ta?s.ta:s.en}</span><span class="ic-val" style="font-size:11px">${s.elig}</span></div>`).join('')}
+    </div>`;
+  }
+
+  if(intent==='history'){
+    const list=txns();
+    const rows=list.length?list.map(t=>`<div class="ic-row"><span class="ic-lbl">${t.month}</span><span class="ic-val" style="font-size:11px">${ta?'அரிசி':'Rice'} ${t.rice}kg · ${ta?'சர்க்கரை':'Sugar'} ${t.sugar}kg · ${ta?'எண்ணெய்':'Oil'} ${t.oil}L · ${t.date}</span></div>`).join(''):`<div class="ic-row"><span style="color:var(--color-text-tertiary);font-size:12px">${ta?'பரிவர்த்தனை வரலாறு இல்லை':'No transaction history found'}</span></div>`;
+    return `<div class="info-card">
+      <div class="ic-title"><i class="ti ti-receipt" aria-hidden="true"></i> ${ta?'சேகரிப்பு வரலாறு':'Collection History'} — ${r.id}</div>
+      ${rows}
+    </div>`;
+  }
+
+  if(intent==='aadhaar'){
+    if(r.aadhaar){
+      return `<div class="info-card">
+        <div class="ic-title"><i class="ti ti-shield-check" aria-hidden="true"></i> ${ta?'ஆதார் நிலை':'Aadhaar Status'}</div>
+        <div class="ic-row"><span class="ic-lbl">${ta?'நிலை':'Status'}</span><span class="ic-val ic-ok">${ta?'✅ இணைக்கப்பட்டது':'✅ Linked'}</span></div>
+        <div class="ic-row"><span class="ic-lbl">${ta?'கார்டு':'Card'}</span><span class="ic-val">${r.cardNo}</span></div>
+        <div class="ic-row"><span class="ic-lbl">${ta?'மாவட்டம்':'District'}</span><span class="ic-val">${r.district}</span></div>
+      </div>
+      <br>${ta?'உங்கள் ஆதார் கார்டு வெற்றிகரமாக இணைக்கப்பட்டுள்ளது.':'Your Aadhaar is successfully linked to your ration card.'}`;
+    } else {
+      return `<div class="info-card">
+        <div class="ic-title"><i class="ti ti-shield-x" aria-hidden="true"></i> ${ta?'ஆதார் இணைக்கப்படவில்லை':'Aadhaar Not Linked'}</div>
+        <div class="ic-row"><span class="ic-lbl">${ta?'நிலை':'Status'}</span><span class="ic-val ic-out">${ta?'❌ இணைக்கப்படவில்லை':'❌ Not linked'}</span></div>
+        <div class="ic-row"><span class="ic-lbl">${ta?'செய்ய வேண்டியது':'Action needed'}</span><span class="ic-val" style="font-size:11.5px">${ta?'CSC மையம் அல்லது tn.gov.in':'Visit CSC center or tn.gov.in'}</span></div>
+        <div class="ic-row"><span class="ic-lbl">${ta?'தேவையான ஆவணங்கள்':'Documents needed'}</span><span class="ic-val" style="font-size:11.5px">Aadhaar card + Ration card</span></div>
+      </div>`;
+    }
+  }
+
+  return null;
+}
+
+const INTENTS_TA={
+  rice:['அரிசி','rice','உரிமை','entitle','மாதம்','month','எவ்வளவு','ration','கிடைக்கும்'],
+  card:['கார்டு','card','விவரம்','detail','ரேஷன்','எண்','number','வகை','type','info'],
+  stock:['இருப்பு','stock','கடை','shop','கிடைக்க','available','நிலை','status','சர்க்கரை','எண்ணெய்','kerosene','sugar','oil','wheat','கோதுமை'],
+  family:['குடும்ப','family','உறுப்பினர்','member','யார்','who','பேர்','person'],
+  complaint:['புகார்','complaint','பதிவு','register','grievance','report','இல்லை missing'],
+  schemes:['திட்டம்','scheme','welfare','நலன்','benefit','free','இலவச'],
+  history:['வரலாறு','history','கடந்த','past','previous','transaction','சேகரிப்பு'],
+  aadhaar:['ஆதார்','aadhaar','aadhar','link','இணைப்பு','verification']
+};
+
+function detectIntent(txt){
+  const t=txt.toLowerCase();
+  let best=null,score=0;
+  for(const[intent,kws] of Object.entries(INTENTS_TA)){
+    const s=kws.filter(k=>t.includes(k.toLowerCase())).length;
+    if(s>score){score=s;best=intent}
+  }
+  return score>0?best:null;
+}
+
+function unknownReply(){
+  const ta=lang==='ta';
+  const options=ta
+    ?['அரிசி விவரம்','கார்டு விவரம்','கடை இருப்பு','குடும்பம்','புகார்','திட்டங்கள்','வரலாறு','ஆதார்']
+    :['Rice entitlement','Card details','Shop stock','Family members','Complaint','Schemes','History','Aadhaar'];
+  return (ta?'மன்னிக்கவும், புரியவில்லை. கீழுள்ள பொத்தான்களை பயன்படுத்துங்கள்:':'Sorry, I did not understand. Please use the buttons below or try these topics:')
+    +'<br><br>'+options.map(o=>`<button class="chip" style="margin:3px 2px" onclick="chipClick(this)">${o}</button>`).join('');
+}
+
+function chipClick(btn){
+  const txt=btn.textContent;
+  document.getElementById('inp').value=txt;
+  handle();
+}
+
+function handle(){
+  const inp=document.getElementById('inp');
+  const txt=inp.value.trim();
+  if(!txt) return;
+  inp.value='';inp.style.height='auto';
+  addMsg('u',txt.replace(/</g,'&lt;'));
+  setTimeout(()=>{
+    const intent=detectIntent(txt);
+    if(intent){
+      const html=respond(intent);
+      addMsg('b',html);
+    } else {
+      addMsg('b',unknownReply());
+    }
+  },300);
+}
+
+function setLang(l){
+  lang=l;
+  document.getElementById('btnTa').className='lbtn'+(l==='ta'?' on':'');
+  document.getElementById('btnEn').className='lbtn'+(l==='en'?' on':'');
+  document.getElementById('lhint').textContent=l==='ta'?'தமிழ் தேர்ந்தெடுக்கப்பட்டது':'English selected';
+  document.getElementById('hdrtitle').textContent=l==='ta'?'தமிழ்நாடு PDS உதவியாளர்':'Tamil Nadu PDS Assistant';
+  document.getElementById('inp').placeholder=l==='ta'?'கேளுங்கள்…':'Ask here…';
+  document.getElementById('wt').textContent=l==='ta'?'வணக்கம்! நான் உங்கள் PDS உதவியாளர்.':'Hello! I am your PDS Assistant.';
+  document.getElementById('ws').innerHTML=l==='ta'?'ரேஷன் கார்டு, இருப்பு, புகார்கள் — எதுவும் கேளுங்கள்.<br>கீழே உள்ள பொத்தான்களை அழுத்துங்கள்.':'Ask about ration cards, stock, complaints — use buttons below.';
+  buildChips(l);
+}
+
+function buildChips(l){
+  const c=document.getElementById('chips');c.innerHTML='';
+  CHIPS[l].forEach(ch=>{
+    const b=document.createElement('button');
+    b.className='chip';b.textContent=ch.l;
+    b.onclick=()=>{const r=respond(ch.fn);addMsg('u',ch.l);setTimeout(()=>addMsg('b',r),250);document.getElementById('wlc')?.remove()};
+    c.appendChild(b);
+  });
+}
+
+function switchUser(){
+  curId=document.getElementById('userSel').value;
+  const r=rc();
+  const badge=document.getElementById('badge');
+  badge.textContent=r.type;
+  badge.className='dbbadge '+(r.type==='PHH'?'g-phh':r.type==='AAY'?'g-aay':'g-nphh');
+  const m=document.getElementById('msgs');
+  m.innerHTML='';
+  const n=document.createElement('div');
+  n.className='notice';
+  n.innerHTML=`<i class="ti ti-switch-horizontal" style="font-size:13px;vertical-align:-2px" aria-hidden="true"></i> Switched to <strong>${r.nameEn}</strong> — ${r.id} · ${r.type} · ${r.district}`;
+  m.appendChild(n);
+  if(document.getElementById('dbpanel').classList.contains('open')) renderDB();
+}
+
+function tg(v,map){return`<span class="tg ${map[v]||'g-ok'}">${v}</span>`}
+function stg(s){return`<span class="tg ${s==='ok'?'g-ok':s==='low'?'g-low':'g-out'}">${s}</span>`}
+
+function renderDB(){
+  document.getElementById('dbcontent').innerHTML=`
+<div class="sectitle"><i class="ti ti-id" style="font-size:12px;vertical-align:-2px" aria-hidden="true"></i> Ration Cards (5)</div>
+<table class="dbt"><thead><tr><th>ID</th><th>Name</th><th>Type</th><th>District</th><th>Members</th><th>Rice</th><th>Aadhaar</th><th>Collected</th></tr></thead><tbody>
+${DB.rationCards.map(r=>`<tr><td><strong>${r.id}</strong></td><td>${r.nameEn}</td><td>${tg(r.type,{PHH:'g-phh',AAY:'g-aay',NPHH:'g-nphh'})}</td><td>${r.district}</td><td>${r.members.length}</td><td>${r.rice}kg</td><td>${r.aadhaar?'<span class="tg g-ok">Yes</span>':'<span class="tg g-out">No</span>'}</td><td>${r.collected?'<span class="tg g-ok">Yes</span>':'<span class="tg g-open">No</span>'}</td></tr>`).join('')}
+</tbody></table>
+
+<div class="sectitle" style="margin-top:10px"><i class="ti ti-building-store" style="font-size:12px;vertical-align:-2px" aria-hidden="true"></i> Shops &amp; Stock (4)</div>
+<table class="dbt"><thead><tr><th>ID</th><th>Shop</th><th>Rice</th><th>Sugar</th><th>Oil</th><th>Kerosene</th><th>Wheat</th></tr></thead><tbody>
+${DB.shops.map(s=>`<tr><td><strong>${s.id}</strong></td><td>${s.nameEn.substring(0,20)}</td><td>${s.stock.rice.qty}kg ${stg(s.stock.rice.s)}</td><td>${s.stock.sugar.qty}kg ${stg(s.stock.sugar.s)}</td><td>${s.stock.oil.qty}L ${stg(s.stock.oil.s)}</td><td>${s.stock.kerosene.qty}L ${stg(s.stock.kerosene.s)}</td><td>${s.stock.wheat.qty}kg ${stg(s.stock.wheat.s)}</td></tr>`).join('')}
+</tbody></table>
+
+<div class="sectitle" style="margin-top:10px"><i class="ti ti-alert-triangle" style="font-size:12px;vertical-align:-2px" aria-hidden="true"></i> Complaints (3)</div>
+<table class="dbt"><thead><tr><th>ID</th><th>Card</th><th>Type</th><th>Status</th><th>Date</th></tr></thead><tbody>
+${DB.complaints.map(c=>`<tr><td><strong>${c.id}</strong></td><td>${c.rcId}</td><td>${c.type}</td><td>${tg(c.status,{open:'g-open',closed:'g-done'})}</td><td>${c.date}</td></tr>`).join('')}
+</tbody></table>
+
+<div class="sectitle" style="margin-top:10px"><i class="ti ti-receipt" style="font-size:12px;vertical-align:-2px" aria-hidden="true"></i> Transactions (5)</div>
+<table class="dbt"><thead><tr><th>ID</th><th>Card</th><th>Month</th><th>Rice</th><th>Sugar</th><th>Oil</th><th>Date</th></tr></thead><tbody>
+${DB.transactions.map(t=>`<tr><td><strong>${t.id}</strong></td><td>${t.rcId}</td><td>${t.month}</td><td>${t.rice}kg</td><td>${t.sugar}kg</td><td>${t.oil}L</td><td>${t.date}</td></tr>`).join('')}
+</tbody></table>
+
+<div class="sectitle" style="margin-top:10px"><i class="ti ti-flag" style="font-size:12px;vertical-align:-2px" aria-hidden="true"></i> Schemes (6)</div>
+<table class="dbt"><thead><tr><th>ID</th><th>Scheme</th><th>Eligibility</th><th>Active</th></tr></thead><tbody>
+${DB.schemes.map(s=>`<tr><td><strong>${s.id}</strong></td><td>${s.en}</td><td>${s.elig}</td><td>${s.active?'<span class="tg g-ok">Yes</span>':'<span class="tg g-out">No</span>'}</td></tr>`).join('')}
+</tbody></table>`;
+}
+
+function toggleDB(){
+  const p=document.getElementById('dbpanel');
+  p.classList.toggle('open');
+  if(p.classList.contains('open')) renderDB();
+}
+
+buildChips('ta');
+</script>
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Tamil Nadu PDS chatbot — no API, fully offline, powered by fake database with rule-based responses</h2>
+
+<div class="root">
+  <div class="hdr">
+    <div class="hdr-top">
+      <div class="hdr-icon"><i class="ti ti-building-store" aria-hidden="true"></i></div>
+      <div class="hdr-info">
+        <div class="hdr-title" id="hdrtitle">தமிழ்நாடு PDS உதவியாளர்</div>
+        <div class="hdr-sub">Tamil Nadu Ration Shop Assistant · Offline Mode</div>
+      </div>
+      <div class="dot"></div>
+    </div>
+    <div class="lang-bar">
+      <div class="lpill">
+        <button class="lbtn on" id="btnTa" onclick="setLang('ta')">தமிழ்</button>
+        <div class="ldiv"></div>
+        <button class="lbtn" id="btnEn" onclick="setLang('en')">English</button>
+      </div>
+      <span id="lhint">தமிழ் தேர்ந்தெடுக்கப்பட்டது</span>
+    </div>
+  </div>
+
+  <div class="dbbar">
+    <span class="dblabel"><i class="ti ti-database" style="font-size:12px;vertical-align:-2px" aria-hidden="true"></i> Test DB:</span>
+    <select class="dbsel" id="userSel" onchange="switchUser()">
+      <option value="RC001">RC001 — முருகேசன் (PHH, Ambur)</option>
+      <option value="RC002">RC002 — லட்சுமி (AAY, Vellore)</option>
+      <option value="RC003">RC003 — Rajan Kumar (NPHH, Chennai)</option>
+      <option value="RC004">RC004 — Fatima Begum (PHH, Ambur)</option>
+      <option value="RC005">RC005 — Selvam (PHH, Salem)</option>
+    </select>
+    <span class="dbbadge g-phh" id="badge">PHH</span>
+    <button class="dbbtn" onclick="toggleDB()"><i class="ti ti-table" style="font-size:12px;vertical-align:-1px" aria-hidden="true"></i> View DB</button>
+  </div>
+
+  <div class="chips" id="chips"></div>
+
+  <div class="msgs" id="msgs">
+    <div class="wlc" id="wlc">
+      <div class="wlc-icon"><i class="ti ti-building-store" aria-hidden="true"></i></div>
+      <div class="wlc-t" id="wt">வணக்கம்! நான் உங்கள் PDS உதவியாளர்.</div>
+      <div class="wlc-s" id="ws">ரேஷன் கார்டு, இருப்பு, புகார்கள் — எதுவும் கேளுங்கள்.<br>கீழே உள்ள பொத்தான்களை அழுத்துங்கள்.</div>
+    </div>
+  </div>
+
+  <div class="inp-area">
+    <div class="inp-wrap">
+      <textarea class="inp" id="inp" rows="1"
+        placeholder="கேளுங்கள் / Ask here…"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();handle()}"
+        oninput="rsz(this)"></textarea>
+      <button class="xbtn" onclick="clr()" aria-label="Clear"><i class="ti ti-x" aria-hidden="true"></i></button>
+    </div>
+    <button class="sbtn" onclick="handle()" aria-label="Send"><i class="ti ti-send" aria-hidden="true"></i></button>
+  </div>
+
+  <div class="dbpanel" id="dbpanel"><div id="dbcontent"></div></div>
+</div>
+</body>
+</html>
